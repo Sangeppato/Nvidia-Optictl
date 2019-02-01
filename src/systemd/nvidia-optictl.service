@@ -1,0 +1,11 @@
+[Unit]
+Description=Disables Nvidia GPU on OS shutdown
+
+[Service]
+Type=oneshot
+RemainAfterExit=true
+ExecStart=/bin/true
+ExecStop=/bin/bash -c "echo 'install nvidia /bin/false' > /usr/lib/modprobe.d/nvidia-optictl.conf"
+
+[Install]
+WantedBy=multi-user.target
