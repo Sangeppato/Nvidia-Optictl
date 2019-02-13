@@ -17,7 +17,7 @@ case $1 in
 	"on")
 		if [ "$STATUS" = "$BLACKLIST" ]; then
 			sudo tee $FILE <<< "#" > /dev/null
-			echo "-- ON --"
+			echo "--- ON ---"
 		fi
 		;;
 	
@@ -30,12 +30,12 @@ case $1 in
 				sudo rmmod nvidia
 			fi
 			sudo tee $FILE <<< "$BLACKLIST" > /dev/null
-			echo "-- OFF --"
+			echo "--- OFF ---"
 		fi
 		;;
 	
 	"status" | "-s")
-		echo "-- STATUS --"
+		echo "--- STATUS ---"
 		if [ "$STATUS" = "$BLACKLIST" ]; then
 			printf "blocked\n"
 		else
