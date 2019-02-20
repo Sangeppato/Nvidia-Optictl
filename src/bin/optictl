@@ -7,12 +7,9 @@ set -e
 BLACKLIST="install nvidia /bin/false"
 FILE="/usr/lib/modprobe.d/nvidia-optictl.conf"
 STATUS=$(cat /usr/lib/modprobe.d/nvidia-optictl.conf)
+RUNTIME_STATUS=$(cat /sys/bus/pci/devices/0000:01:00.0/power/runtime_status)
 
 case $1 in
-	
-	"" | "help" | "-h")
-		printf "Usage: [-h,help] [on] [off] [-s,status]\n"
-		;;
 	
 	"on")
 		if [ "$STATUS" = "$BLACKLIST" ]; then
@@ -36,11 +33,16 @@ case $1 in
 	
 	"status" | "-s")
 		echo "--- STATUS ---"
+		printf "$RUNTIME_STATUS"
 		if [ "$STATUS" = "$BLACKLIST" ]; then
-			printf "blocked\n"
+			printf " (locked)\n"
 		else
-			cat /sys/bus/pci/devices/0000:01:00.0/power/runtime_status
+			printf "\n"
 		fi
+		;;
+	
+	*)
+		printf "Usage: [on] [off] [-s,status]\n"
 		;;
 	
 esac
