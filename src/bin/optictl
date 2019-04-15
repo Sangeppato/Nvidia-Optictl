@@ -31,7 +31,7 @@ case $1 in
 		fi
 		;;
 	
-	"status" | "-s")
+	"status")
 		echo "--- STATUS ---"
 		printf "$RUNTIME_STATUS"
 		if [ "$STATUS" = "$BLACKLIST" ]; then
@@ -42,7 +42,7 @@ case $1 in
 		;;
 	
 	*)
-		printf "Usage: [on] [off] [-s,status]\n"
+		printf "Usage: [on] [off] [status]\n"
 		;;
 	
 esac
